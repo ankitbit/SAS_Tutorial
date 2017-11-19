@@ -1,0 +1,90 @@
+/* Session 2 */
+
+/* Reading of data
+
+(I)  USE OF DATABASES IN SAS FORMAT (* .SAS7BDAT)
+
+  1.1 How to access databases in SAS format from a BLOC DATA
+  1.2 How to access databases in SAS format from a BLOC PROC
+
+(II) IMPORT / EXPORTATION FORMATS EXCEL, SPSS, ACCESS, SPSS ...
+
+  2.1 IMPORTATION OF DATA IN OTHER FORMATS (EXCEL, SPSS ...)
+  2.2 EXPORT OF SAS DATA TO OTHER FORMATS (EXCEL, SPSS ...)
+
+*/
+
+ 
+
+* I USE OF DATABASES IN SAS FORMAT (* .SAS7BDAT);
+
+/*1.1.1 How to access databases in SAS format from a BLOC DATA */
+
+* A library is simply a link that is established from SAS to a physical path on the disk;
+* The user can define their own libraries using the LIBNAME command;
+ 
+LIBNAME libref 'k: \ route';
+
+* libref is a name that the user decides max 8 characters (whichever you want), and 'k: \ route' is the structure
+of folders that you want to link with SAS;
+
+libname folder 'd: \ CURSAS16_17 \ S02 \ dades s02 \';
+
+* 1 Message in the Log
+
+NOTE: Libref FOLDER was successfully assigned as follows:
+Physical Name: d: \ CURSAS16_17 \ S02 \;
+
+* 2 In the explorer window you should see a library with the name that you gave it;
+
+/ * In the same session it may be necessary to execute more than one LIBNAME command depend? from where
+are the databases that we need to use and where we want to create them
+
+LIBNAME libref? K: \ route ?;
+LIBNAME libref2? K: \ ruta2 ?;
+LIBNAME librefj? K: \ rutaj?; * /
+
+/ * BLOC DATA syntax with libref * /
+
+DATA libref.new_base_name [(options)]; / * the bases that will be created * /
+SET freef.existing_base_name [options]; / * The bases that are already created * /
+/ * more commands; * /
+RUN;
+
+
+* example from the base Girona.sas7bdat I will create a new base in
+the same route to be? Girona_red.sas7bdat (I only want the first 20 observations);
+
+data folder.girona_red; / * this is the base to be created? * /
+set folder.girona (obs = 20); / * this is the one that enters (already exists) * /
+run;
+
+/*log
+
+There were 20 observations read from the data set E.GIRONA.
+NOTE: The data set CARPETA.GIRONA_RED has 20 observations and 3 variables */
+
+* Another possibility is to do it as:
+
+
+data 'd: \ CURSAS16_17 \ S02 \ dades s02 \ girona_red';
+set 'd: \ CURSAS16_17 \ S02 \ dades s02 \ girona' (obs = 20);
+run
+
+/ * But given that SAS actually, whatever we do, internally only works with libraries
+and not in all the procs let us make a specification in the form of 'd: \ CURSAS16_17 \ S02 \ girona_red'
+It is preferable to work with bookstores.
+
+/1.2.2 How to access databases in SAS format from a BLOC PROC * /
+
+/ * LIBNAME libref 'k: \ path'; * /
+
+PROC nomprocedimiento
+DATA = libref.exd_dbd_name [(options)];
+/ * PROC COMMANDS * /
+RUN;
+
+* Example we use Girona.sas7bdat to list the first 10 observations;
+
+proc print data = folder.girona (obs = 10);
+run
