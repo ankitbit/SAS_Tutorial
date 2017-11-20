@@ -2,6 +2,14 @@
 
 * Exercise 1;
 
+/*Create the base d: \ CURSAS16_17 \ S02 \ Exercises \ GIRONA.SAS7BDAT from the population data of the sheet
+Gerona in the file d: \ CURSAS16_17 \ S02 \ dades_s02 \ POBMUNCAT_CEN01.XLS.
+a) How many observations should GIRONA.SAS7BDAT have?
+b) How many observations do you have?
+c) Modify the syntax of the file Ej1_S02.SAS.
+Save the syntax in the Ej1_S02.SAS file.*/
+
+* Solution 1;
 libname e 'ruta';
 
 PROC IMPORT OUT= e.GIRONA 
