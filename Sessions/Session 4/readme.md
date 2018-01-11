@@ -16,3 +16,5 @@ An introductory lecture on the topic can be found here [Using **PROC SORT** and 
 You can sort the data file by all of the variables (which can be indicated with the special keyword **_ ALL_** ), which would force the duplicate observations to be next to each other.
 
 * Difference between NODUPLICATE and NODUPKEY
+* Difference between NODUP and NODUPKEY
+* Importance of "n" and "noobs" in PROC PRINT
