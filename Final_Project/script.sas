@@ -4,7 +4,7 @@
 /* Código generado el: 4/1/18 22:03 */
 
 %web_drop_table(WORK.IMPORT);
-/* Importing the Dataset in the SAS for internal use 
+/* Importing the Dataset in the SAS for internal use
 */
 FILENAME REFFILE '/folders/myfolders/Submission/data/train.csv';
 
@@ -14,11 +14,29 @@ GETNAMES=YES;
 DELIMITER=";"; 
 RUN;
 
-PROC CONTENTS DATA=WORK.IMPORT; RUN;
-
 DATA IMPORT;
-SET WORK
+SET WORK.IMPORT;
+LABEL 
+ID = "Identifier of the individual"
+age= "Age of the individual"
+workclass= "Type of work "
+fnlwgt= " "
+education= "Maximum educational qualification"
+education-num= " "
+marital-status= "Marital status of the individual"
+occupation= "Name of the job profile"
+relationship= "Relationship status of the individual"
+race= "Race of the individual"
+sex= "Gender of the individual"
+capital-gain= "Amount of capital gain"
+capital-loss= "Amount of capital loss"
+hours-per-week= "Amount of work by number of hours"
+native_country="Name of the country of the individual"
+class="Probability for the label";
+RUN;
 
+
+PROC CONTENTS DATA=WORK.IMPORT; RUN;
 
 
 /* proc sql;  */
